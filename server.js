@@ -24,7 +24,9 @@ app.post('/token', (req, res) => {
   }
 
   jwt.verify(refreshToken, process.env.REFRESH_SECRET, (error, client) => {
-    if (error) return res.sendStatus(403)
+    if (error) {
+      res.sendStatus(403)
+    } 
     // create a new access token 
     const accessToken = accessAuth({ name: client.name })
     res.json({ accessToken: accessToken })
